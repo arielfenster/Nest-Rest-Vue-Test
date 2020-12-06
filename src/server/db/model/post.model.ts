@@ -4,5 +4,5 @@ export class Post {
     public author: string,
     public text: string,
     public views: number
-  ) {}
+  ) { }
 }
