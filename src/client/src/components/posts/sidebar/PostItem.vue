@@ -1,5 +1,5 @@
 <template>
-  <div class="post">
+  <div class="post" @click="$emit('click', post)">
    <h3> {{ post.title }} </h3>
   </div>
 </template>
@@ -13,7 +13,7 @@ export default {
 <style scoped>
 .post {
   border-top: 4px dashed black;
-  padding: 30px 10px;
+  padding: 30px 20px;
 }
 .post:hover {
   cursor: pointer;
