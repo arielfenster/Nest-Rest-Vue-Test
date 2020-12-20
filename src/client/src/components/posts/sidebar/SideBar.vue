@@ -26,12 +26,6 @@ export default {
 </script>
 
 <style scoped>
-.sidebar {
-  border: 4px solid black;
-  height: 100%;
-  background: #b3e5fc;
-  grid-row: 1 / -1;
-}
 
 h2 {
   margin: 20px;
@@ -39,6 +33,10 @@ h2 {
 
 ul {
   list-style-type: none;
+}
+
+li:last-child {
+  border-bottom: 4px dashed black;
 }
 
 </style>
