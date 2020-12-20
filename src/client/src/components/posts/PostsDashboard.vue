@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <div class="actions">
-      <h1> this is actions div </h1>
+      <h1> Posts Dashboard </h1>
+      <h3> Click a button to fetch desired amount of posts </h3>
+      <button @click="fetchPosts(1)"> +1 </button>
+      <button @click="fetchPosts(5)"> +5 </button>
+      <button @click="fetchPosts(10)"> +10 </button>
     </div>
     <div class="sidebar">
       <SideBar :posts="posts" @click="setClickedPost" />
@@ -24,21 +28,19 @@ export default {
   data() {
     return {
       clickedPost: null,
+      posts: [],
     };
-  },
-  computed: {
-    posts() {
-      return [
-        { id: 'sad', title: 'This is title #1', author: 'this is author number 1', body: 'this is the body of post #1', views: 13 },
-        { id: 'sad2', title: 'This is title #2', author: 'this is author number 2', body: 'this is the body of post #2', views: 14 },
-        { id: 'sad3', title: 'This is title #3', author: 'this is author number 3', body: 'this is the body of post #3', views: 15 },
-        { id: 'sad4', title: 'This is title #4', author: 'this is author number 4', body: 'this is the body of post #4', views: 16 },
-      ];
-    },
   },
   methods: {
     setClickedPost(post) {
       this.clickedPost = post !== this.clickedPost ? post : null;
+    },
+    fetchPosts(amount) {
+      const start = parseInt(Math.floor(Math.random() * 100), 10);
+      fetch(`http://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${amount}`)
+        .then((response) => response.json())
+        .then((data) => this.posts.push(...data))
+        .catch((error) => console.log(error));
     },
   },
 };
@@ -55,16 +57,32 @@ export default {
 
 .actions {
   grid-column: 4 / -1;
-  border: 2px solid purple;
   grid-row: 1 / 3;
+  text-align: center;
+  border-bottom: 2px solid black;
+  margin-top: 20px;
+}
+
+button {
+  border-radius: 10%;
+  font-size: 2em;
+  margin: 20px;
+  background-color: blue;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: lightskyblue;
 }
 
 .sidebar {
-  border: 2px solid black;
+  border-right: 2px solid black;
   height: 100%;
   background: #b3e5fc;
   grid-row: 1 / -1;
   grid-column: 1 / 4;
+  overflow: auto;
 }
 
 .display {

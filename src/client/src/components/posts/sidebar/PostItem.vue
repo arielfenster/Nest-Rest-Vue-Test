@@ -1,7 +1,7 @@
 <template>
   <div class="post" @click="$emit('click', post)">
-   <h3> {{ post.title }} </h3>
-   <span> Views: {{ post.views }} </span>
+   <h2> Title: </h2>
+   <span> {{ post.title }} </span>
   </div>
 </template>
 
